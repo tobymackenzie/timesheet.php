@@ -1,0 +1,23 @@
+{
+	"name": "tjm/php-timesheet"
+	,"description": "Script providing simple way to calculate time spent on projects using a timesheet."
+	,"authors": [
+		{
+			"name": "Toby Mackenzie"
+			,"email": "public@tobymackenzie.com"
+			,"homepage": "http://www.tobymackenzie.com"
+		}
+	]
+	,"license": "BSD-3-Clause"
+	,"minimum-stability": "dev"
+	,"prefer-stable": true
+	,"require" : {
+		"php": ">=5.3"
+	}
+	,"autoload" : {
+		"psr-4" : {
+			"TJM\\PHPTimesheet\\" : "src"
+		}
+	}
+	,"bin": ["bin/timesheet"]
+}

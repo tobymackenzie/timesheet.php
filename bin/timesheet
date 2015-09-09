@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+require_once(__DIR__ . '/../vendor/autoload.php');
+
+use TJM\PHPTimesheet\TimeClockCalculator;
+use TJM\PHPTimesheet\TimeSheetMigrator;
+
+$source = $argv[1];
+
+$data = TimeSheetMigrator::parse(file_get_contents($source));
+$times = TimeSheetMigrator::getTimes($data);
+
+$diff = TimeClockCalculator::calculateDiffs($times);
+$decimalHours = TimeClockCalculator::getDecimalHours($diff);
+$roundedDecimalHours = TimeClockCalculator::roundDecimalHours($decimalHours);
+echo "diff is {$diff->h} hours and {$diff->i} minutes, or {$decimalHours} -> {$roundedDecimalHours} hours";
