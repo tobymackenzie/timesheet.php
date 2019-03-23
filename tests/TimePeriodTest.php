@@ -1,8 +1,8 @@
 <?php
-
+use PHPUnit\Framework\TestCase;
 use TJM\PHPTimesheet\TimePeriod;
 
-class TimePeriodTest extends PHPUnit_Framework_TestCase{
+class TimePeriodTest extends TestCase{
 	public function testConstruct(){
 		$periods = Array(
 			Array(
