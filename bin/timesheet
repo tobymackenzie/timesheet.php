@@ -15,4 +15,4 @@ $diff = TimeClockCalculator::calculateDiffs($times);
 $decimalHours = TimeClockCalculator::getDecimalHours($diff);
 $roundedDecimalHours = TimeClockCalculator::roundDecimalHours($decimalHours);
 $amount = $hourlyRate * $roundedDecimalHours;
-echo "{$roundedDecimalHours}(\${$amount})\n";
+echo "{$roundedDecimalHours}(\$" . number_format($amount, 2) . ")\n";
