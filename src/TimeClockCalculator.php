@@ -127,7 +127,7 @@ class TimeClockCalculator{
 		foreach($sheet->getPeriods() as $period){
 			$hours = TimeClockCalculator::calculateDiffs($period->getTimes(), 'roundDecimalHours');
 			if($hours){
-				$string .= '$' . number_format($hours * $this->rate, 2);
+				$string .= '- $' . number_format($hours * $this->rate, 2);
 				$days = $period->getDays();
 				if($days && count($days)){
 					$string .= " for period {$days[0]->getDate()}";
