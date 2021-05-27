@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+require_once(__DIR__ . '/../vendor/autoload.php');
+
+use TJM\PHPTimesheet\Sheet;
+use TJM\PHPTimesheet\TimeClockCalculator;
+
+$source = $argv[1] ?? __DIR__ . '/../sheet.txt';
+$hourlyRate = $argv[2] ?? 7.25;
+
+$sheet = new Sheet(file_get_contents($source));
+$calc = new TimeClockCalculator($hourlyRate);
+echo $calc->getSheetInvoiceAmounts($sheet);
