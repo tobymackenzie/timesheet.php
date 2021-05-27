@@ -37,6 +37,14 @@ class TimePeriod{
 	}
 
 	/*
+	Method: getHours
+	Get length of time from start to end, in hours
+	*/
+	public function getHours($format = 'object'){
+		return $this->getLength($this->start, $this->end, 'decimal');
+	}
+
+	/*
 	Method: getLength
 	Get length of time from start to end.
 	Argument:
