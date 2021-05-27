@@ -17,8 +17,15 @@ class TimePeriodTest extends TestCase{
 			// ,new TimePeriod("0900-")
 		);
 		foreach($periods as $config){
+			//--range argument
 			$range = $config['start'] . '-' . $config['end'];
 			$period = new TimePeriod($range);
+			$this->assertEquals($config['start'], $period->getStart(), 'Passed start should match instance start');
+			$this->assertEquals($config['end'], $period->getEnd(), 'Passed end should match instance end');
+			$this->assertEquals($range, $period->getRange(), 'Construction range should match instance range');
+
+			//--separate arguments
+			$period = new TimePeriod($config['start'], $config['end']);
 			$this->assertEquals($config['start'], $period->getStart(), 'Passed start should match instance start');
 			$this->assertEquals($config['end'], $period->getEnd(), 'Passed end should match instance end');
 			$this->assertEquals($range, $period->getRange(), 'Construction range should match instance range');
