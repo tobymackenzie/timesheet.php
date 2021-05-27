@@ -5,6 +5,7 @@ use DateInterval;
 use DateTime;
 
 class TimeClockCalculator{
+	protected $rate = 7.25;
 	static public $verbose = true;
 
 	/*
@@ -111,5 +112,32 @@ class TimeClockCalculator{
 				return round($hours * 4) / 4;
 			break;
 		}
+	}
+
+	/*=====
+	==instance
+	=====*/
+	public function __construct($rate = null){
+		if(isset($rate)){
+			$this->rate = $rate;
+		}
+	}
+	public function getSheetInvoiceAmounts(Sheet $sheet){
+		$string = '';
+		foreach($sheet->getPeriods() as $period){
+			$hours = TimeClockCalculator::calculateDiffs($period->getTimes(), 'roundDecimalHours');
+			if($hours){
+				$string .= '$' . number_format($hours * $this->rate, 2);
+				$days = $period->getDays();
+				if($days && count($days)){
+					$string .= " for period {$days[0]->getDate()}";
+					if(count($days) > 1){
+						$string .= "-{$days[count($days) - 1]->getDate()}";
+					}
+				}
+				$string .= "\n";
+			}
+		}
+		return $string;
 	}
 }
