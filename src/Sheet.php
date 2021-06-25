@@ -8,8 +8,12 @@ class Sheet{
 		if(is_array($in)){
 			$this->periods = $in;
 		}elseif(is_string($in)){
-			foreach(explode('-----', $in) as $period){
-				$this->periods[] = new PayPeriod("-----" . $period);
+			if(strpos($in, '-----') !== false){
+				foreach(explode('-----', $in) as $period){
+					$this->periods[] = new PayPeriod("-----" . $period);
+				}
+			}else{
+				$this->periods[] = new PayPeriod($in);
 			}
 		}
 	}

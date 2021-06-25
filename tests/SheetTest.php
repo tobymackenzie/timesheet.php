@@ -13,6 +13,10 @@ class SheetTest extends TestCase{
 				'file'=> 'sheet1.txt',
 				'hours'=> 39.5,
 			],
+			[
+				'file'=> 'barePeriod.txt',
+				'hours'=> 14.5,
+			],
 		];
 		foreach($sheets as $config){
 			$sheet = new Sheet(file_get_contents(__DIR__ . '/resources/' . $config['file']));
