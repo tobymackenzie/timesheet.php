@@ -6,7 +6,7 @@ use DateTime;
 
 class TimeClockCalculator{
 	protected $rate = 7.25;
-	static public $verbose = true;
+	static public $verbose = false;
 
 	/*
 	Create a "Time" object from a string
