@@ -3,14 +3,22 @@ namespace TJM\PHPTimesheet;
 use Exception;
 
 class Day{
-	const REGULAR_DAY_REGEX = "/^\s*([\d]+)\s*:\s*([0-9\-,]+)\s*(:\s*\(@([^\)]+)\))/";
+	const REGULAR_DAY_REGEX = "/^\s*([\d]+)\s*:\s*([0-9\-,]+)\s*(:\s*\(@([^\)]+)\))?/";
+	const HOLIDAY_DAY_REGEX = "/^\s*([\d]+)\s*holiday\s+day:?\s*(.*)$/i";
+	const SICK_DAY_REGEX = "/^\s*([\d]+)\s*sick\s+day:?\s*(.*)$/i";
+	const VACATION_DAY_REGEX = "/^\s*([\d]+)\s*vacation\s+day:?\s*(.*)$/i";
 	protected $date;
+	protected $description;
 	protected $location;
 	protected $times = [];
-	public function __construct($in, $date = null, $location = null){
+	public function __construct($in, $date = null, $location = null, $description = null){
 		if(is_string($in) && preg_match(static::REGULAR_DAY_REGEX, $in, $matches)){
 			$date = $matches[1];
 			$times = $matches[2] ?? [];
+			if(isset($matches[4])){
+				$location = $matches[4];
+			}
+		}elseif(is_string($in) && preg_match(static::HOLIDAY_DAY_REGEX, $in, $matches)){
 			if(isset($matches[4])){
 				$location = $matches[4];
 			}
