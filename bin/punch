@@ -1,0 +1,42 @@
+#!/usr/bin/env php
+<?php
+/*
+Adds date / time entry using current time, based on values currently in sheet, ie:
+- will add date line if last line is current date
+- will set end time if time range started
+- will set start time otherwise
+
+!!! Quick, simple implementation, doesn't use any of the class code.  Will break if that implementation changes.
+*/
+//--config
+$file = 'current.txt';
+$timezone = 'America/New_York';
+
+//--main
+chdir(__DIR__ . '/..');
+if(!file_exists($file)){
+	file_put_contents($file, '-----');
+}
+$data = explode("\n", file_get_contents($file));
+$i = count($data) - 1;
+if(empty($data[$i])){
+	--$i;
+}
+$last = $data[$i];
+//--must use proper timezone
+if(date_default_timezone_get() !== $timezone){
+	date_default_timezone_set($timezone);
+}
+$date = date('ymd');
+$time = date('Hi');
+if(substr($last, 0, 6) !== $date){
+	++$i;
+	$data[$i] = "{$date}: {$time}";
+}elseif(preg_match('/:[ ]+$/', $last, $matches)){
+	$data[$i] .= $time;
+}elseif(preg_match('/[\d]{0,4}-[\d]{0,4}$/', $last, $matches)){
+	$data[$i] .= ",{$time}";
+}else{
+	$data[$i] .= "-{$time}";
+}
+file_put_contents($file, implode("\n", $data));
