@@ -40,3 +40,4 @@ if(substr($last, 0, 6) !== $date){
 	$data[$i] .= "-{$time}";
 }
 file_put_contents($file, implode("\n", $data));
+echo "Punched: " . $data[$i] . "\n";
