@@ -8,7 +8,7 @@
 			,"homepage": "http://www.tobymackenzie.com"
 		}
 	]
-	,"license": "BSD-3-Clause"
+	,"license": "0BSD"
 	,"minimum-stability": "dev"
 	,"prefer-stable": true
 	,"require" : {
